@@ -1,0 +1,125 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+
+
+
+\title{PLTL Exercise 2 (Time Complexity)}
+\author{CCOM 3034 – Data Structures \& Algorithms}
+\date{Week 2}
+
+\begin{document}
+
+\maketitle
+
+\section{Notes on Time Complexity}
+
+In class, we analyzed ``theoretically'' the number of ``steps'' an algorithm takes. For example, we analyzed the Linear Search algorithm and estimated its number of steps, $T(N) = 2N + 2$. This estimate is important because now we know that the number of steps the algorithm takes grows linearly with respect to the size of the array being searched. This allows us to have an idea of how the \textbf{execution time} grows as a function of the input size if we implement the algorithm. Since execution time is proportional to the number of steps, we can predict that a C++ function that implements Linear Search will have an execution time of $t_{exec}(N) = c N$, where $c$ is a constant that we find experimentally (i.e. running the program).
+
+\subsection{Some questions you may have\dots}
+
+\begin{itemize}
+    \item \textbf{Why do we eliminate $N$'s coefficient (2) and substitute it by $c$?} \\
+
+    Because we don't know how much time each step will take, so substituting by $c$ is sufficient to express that there's a linear relation between time and input size.
+
+    \item \textbf{Why do we eliminate the constant in the expression? (i.e. the 2 in $T(N) = 2N + 2$)?} \\
+    
+    Because for big values of $N$, the term is negligible.  
+
+    \item \textbf{How can we calculate $c$?} \\
+
+    For this course's purpose, it's sufficient to measure the execution time for some value of $N$. \\ Let's say we run the program for an array of size 1,000,000 and the execution time is 4 seconds. In other words, $t_{exec}(1,000,000) = c \times 1,000,000 = 4$ s. Therefore, solving for $c$, we see $c = 4 \times 10^{-6}$ s.
+    
+    \item \textbf{What purpose does it serve us to calculate $c$?} \\
+
+    Now that we've ``fitted'' our model for the algorithm's time complexity, we can use it to predict the execution time for other sizes of $N$. For example, how much time would you expect the same program to take for an input size of 2,000,000 (with the same hardware, conditions, etc.)? The answer is $t_{exec}(2,000,000) = c \times 2,000,000 = (4 \times 10^{-6}$ s$) \times 2,000,000 = 8$ s.
+\end{itemize}
+
+\newpage
+
+\subsection{Another example\dots}
+
+Let's say we now implement Binary Search. Our analysis revealed that its complexity is logarithmic. That is, its execution time can be modeled as $t_{exec}(N) = c\log_{2} N$. If our implementation of it takes 1 second to process an array of 1,000,000 elements, we can calculate $c$ by plugging in and solving for $c$: \\
+
+$t_{exec}(1,000,000) = c \times \log_{2}(1,000,000) = 1$ s. \\
+
+\textbf{Hence,} $c \approx 0.05$ s. \\
+
+\noindent Now, how much time would it take for an array double that size? \\
+
+\textbf{Plugging in,} $t_{exec}(2,000,000) \approx (0.05$ s$) \log_{2}(2,000,000) \approx 1.05$ s \textbf{is the answer.} \\
+
+\noindent These examples illustrate how the rate of growth of a linear algorithm is higher (i.e. grows faster) than a logarithmic one. Note that, when duplicating the input size, the linear algorithm required double the time than for the original size (4 s vs. 8 s), while the logarithmic algorithm required only an additional fraction of time than for the original size (1 s vs. 1.05 s).
+
+\subsection{One final example\dots}
+
+A quadratic algorithm with processing time $T(n) = c n^{2}$ spends $T(N)$ seconds for processing $N$ data items. How much time will be spent for processing $n = 5,000$ data items, assuming that for $N = 100$, $T(N) = 1$ ms? \\
+
+$T(100) = c n^{2} = c \times (100)^{2} = c \times (1 \times 10^{4}) = 1$ ms \\
+
+$c = 1 \times 10^{-4}$ ms \\
+
+\textbf{To process $n = 5,000$, we substitute} $T(5,000) = c n^{2} = (1 \times 10^{-4}$ ms$) \times (5,000)^{2} = 2.5$ s.
+
+\newpage
+
+\section{Exercises (taken from a problem set)}
+
+\begin{enumerate}
+
+    \item  An algorithm with time complexity $O(f(n))$ and processing time $T(n) = cf(n)$, where $f(n)$ is a known function of $n$, spends 10 seconds to process 1000 data items. How much time will be spent to process 100,000 data items if $f(n) = n$ and $f(n) = n^{3}$?
+    
+    \item Assume that each of the expressions below gives the processing time $T(n)$ spent by an algorithm for solving a problem of size $n$. Select the dominant term(s) having the steepest increase in $n$ and specify the lowest Big-Oh complexity of each algorithm.
+    
+    \begin{center}
+        \begin{tabular}{ |c|c|c| } 
+            \hline
+            Expression & Dominant Term(s) & O(\dots) \\
+            \hline
+            $5 + 0.001n^{3} + 0.025n$ & & \\ 
+            \hline
+            $500n + 100n^{1.5} + 50n \log_{10} n$ & & \\ 
+            \hline
+            $0.3n + 5n^{1.5} + 2.5n^{1.75}$ & & \\ 
+            \hline
+            $n^2\log_{2} n + n(\log_{2} n)^2$ & & \\ 
+            \hline
+            $n \log_{3} n + n \log_{2} n$ & & \\ 
+            \hline
+            $3 \log_{8} n + \log_{2}(\log_{2}(\log_{2} n))$ & & \\
+            \hline
+            $100n + 0.01n^{2}$ & & \\
+            \hline
+            $0.01n + 100n^{2}$ & & \\
+            \hline
+            $2n + n^{0.5} + 0.5n^{1.25}$ & & \\
+            \hline
+            $0.01n \log_{2} n + n(\log_{2} n)^{2}$ & & \\
+            \hline
+            $100n \log_{3} n + n^{3} + 100n$ & & \\
+            \hline
+            $0.003 \log_{4} n + \log_{2}(\log_{2} n)$ & & \\
+            \hline
+        \end{tabular}
+    \end{center}
+    
+    \item Algorithms \bold{A} and \bold{B} spend exactly $T_{A}(n) = 0.1n^{2}\log_{10} n$ and $T_{B}(n) = 2.5n^{2}$ microseconds, respectively, for a problem of size $n$. Choose the algorithm, which is better in the Big-Oh sense, and find out a problem size $n_{0}$ such that for any larger size $n > n_{0}$ the chosen algorithm outperforms the other. If your problems are of the size $n \leq 10^{9}$, which algorithm will you recommend to use?
+    
+    \item One of the two software packages, A or B, should be chosen to process very big databases, containing each up to $10^{12}$ records. Average processing time of the package A is $T_{A}(n) = 0.1 n \log_{2} n$ microseconds, and the average processing time of the package B is $T_{B}(n) = 5 n$ microseconds. Which algorithm has better performance in a ``Big-Oh'' sense? Work out the exact conditions when these packages outperform each other.
+    
+    \item Software packages A and B of complexity $O(n \log n)$ and $O(n)$, respectively, spend exactly $T_{A}(n) = c_{A}\,n \log_{10} n$ and $T_{B}(n) = c_{B}\,n$ milliseconds to process $n$ data items. During a test, the average time of processing $n = 104$ data items with the package A and B is 100 milliseconds and 500 milliseconds, respectively. Work out exact conditions when one package actually outperforms the other and recommend the best choice if up to $n = 109$ items should be processed.
+    
+\end{enumerate}
+
+\end{document}

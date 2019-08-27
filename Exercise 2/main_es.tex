@@ -1,0 +1,100 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+
+
+
+\title{Ejercicio PLTL 2 (Complejidad Computacional)}
+\author{CCOM 3034 – Estructura de Datos \& Algoritmos}
+\date{Semana 2}
+
+\begin{document}
+
+\maketitle
+
+\section{Notas sobre Complejidad Computacional}
+
+En clase hemos analizado ``te\'oricamente'' la cantidad de pasos que requiere un algoritmo. Por ejemplo, hemos analizado el algoritmo de b\'usqueda lineal y hemos estimado su n\'umero de pasos $T(N) = 2N + 2$. La parte m\'as importante del estimado es el hecho de que el n\'umero de pasos del algoritmo crece linealmente con respecto al tama\~no del arreglo donde busca. Esto, a su vez, nos permite tener una idea de c\'omo se comportar\'a el tiempo de ejecuci\'on si implementamos este algoritmo. Dado que el tiempo de ejecuci\'on es proporcional a la cantidad de pasos, podemos predecir que el tiempo de ejecuci\'on de una funci\'on de C++ que implemente b\'usqueda lineal ser\'a $t_{exec}(N) = c·N$, donde $c$ es una constante que debemos estimar experimentalmente (i.e. corriendo el programa).
+
+\begin{itemize}
+    \item \textbf{?`Por qu\'e eliminamos el coeficiente (2) que preced\'ia a la $N$ y lo sustituimos por la $c$?} \\
+
+    Porque no sabemos cu\'anto tiempo tomar\'a ejecutarse cada paso as\'i que la constante $c$ ser\'a suficiente para expresar que hay una relaci\'on lineal entre el tiempo y el tama\~no del arreglo. 
+
+    \item \textbf{?`Por qu\'e eliminamos el t\'ermino constante de la expresi\'on (e.g. el 2 de $T(N) = 2N + 2$)?} \\
+    
+    Porque para valores grandes de $N$, ese t\'ermino es descartable.  
+
+    \item \textbf{?`C\'omo podemos calcular $c$?} \\
+
+    Basta con medir el tiempo de ejecuci\'on para alg\'un tamaño de $N$. Digamos que corres el programa para un arreglo de tama\~no 1,000,000 y el tiempo de ejecuci\'on es 4 segundos. En otra palabras, $t_{exec}(1,000,000) = c \times 1,000,000 = 4$ seg. Por lo tanto, $c = 4 \times 10^{-6}$ seg.
+    
+    \item \textbf{?`Para qu\'e sirvi\'o calcular la $c$?} \\
+
+    Ahora que has ``ajustado'' el modelo de tiempo de ejecució\'on, puedes usarlo para predecir el tiempo de ejecuci\'on para otros tama\~nos de $N$. Por ejemplo, cu\'anto esperar\'ias que tome el programa para un ``input'' de tama\~no 2,000,000 (para ese mismo programa, en esa misma computadora)? \\
+    La respuesta es $t_{exec}(2,000,000) = c \times 2,000,000 = (4 \times 10^{-6}$ seg $) \times 2,000,000 = 8$ seg.
+
+    
+\end{itemize}
+
+\newpage
+
+\section{Ejercicios (sacados de un ``problem set'')}
+
+\begin{enumerate}
+
+    \item  An algorithm with time complexity $O(f(n))$ and processing time $T(n) = cf(n)$, where $f(n)$ is a known function of $n$, spends 10 seconds to process 1000 data items. How much time will be spent to process 100,000 data items if $f(n) = n$ and $f(n) = n^{3}$?
+    
+    \item Assume that each of the expressions below gives the processing time $T(n)$ spent by an algorithm for solving a problem of size $n$. Select the dominant term(s) having the steepest increase in $n$ and specify the lowest Big-Oh complexity of each algorithm.
+    
+    \begin{center}
+        \begin{tabular}{ |c|c|c| } 
+            \hline
+            Expression & Dominant Term(s) & O(\dots) \\
+            \hline
+            $5 + 0.001n^{3} + 0.025n$ & & \\ 
+            \hline
+            $500n + 100n^{1.5} + 50n \log_{10} n$ & & \\ 
+            \hline
+            $0.3n + 5n^{1.5} + 2.5n^{1.75}$ & & \\ 
+            \hline
+            $n^2\log_{2} n + n(\log_{2} n)^2$ & & \\ 
+            \hline
+            $n \log_{3} n + n \log_{2} n$ & & \\ 
+            \hline
+            $3 \log_{8} n + \log_{2}(\log_{2}(\log_{2} n))$ & & \\
+            \hline
+            $100n + 0.01n^{2}$ & & \\
+            \hline
+            $0.01n + 100n^{2}$ & & \\
+            \hline
+            $2n + n^{0.5} + 0.5n^{1.25}$ & & \\
+            \hline
+            $0.01n \log_{2} n + n(\log_{2} n)^{2}$ & & \\
+            \hline
+            $100n \log_{3} n + n^{3} + 100n$ & & \\
+            \hline
+            $0.003 \log_{4} n + \log_{2}(\log_{2} n)$ & & \\
+            \hline
+        \end{tabular}
+    \end{center}
+    
+    \item Algorithms \bold{A} and \bold{B} spend exactly $T_{A}(n) = 0.1n^{2}\log_{10} n$ and $T_{B}(n) = 2.5n^{2}$ microseconds, respectively, for a problem of size $n$. Choose the algorithm, which is better in the Big-Oh sense, and find out a problem size $n_{0}$ such that for any larger size $n > n_{0}$ the chosen algorithm outperforms the other. If your problems are of the size $n \leq 10^{9}$, which algorithm will you recommend to use?
+    
+    \item One of the two software packages, A or B, should be chosen to process very big databases, containing each up to $10^{12}$ records. Average processing time of the package A is $T_{A}(n) = 0.1 n \log_{2} n$ microseconds, and the average processing time of the package B is $T_{B}(n) = 5 n$ microseconds. Which algorithm has better performance in a ``Big-Oh'' sense? Work out the exact conditions when these packages outperform each other.
+    
+    \item Software packages A and B of complexity $O(n \log n)$ and $O(n)$, respectively, spend exactly $T_{A}(n) = c_{A}\,n \log_{10} n$ and $T_{B}(n) = c_{B}\,n$ milliseconds to process $n$ data items. During a test, the average time of processing $n = 104$ data items with the package A and B is 100 milliseconds and 500 milliseconds, respectively. Work out exact conditions when one package actually outperforms the other and recommend the best choice if up to $n = 109$ items should be processed.
+    
+\end{enumerate}
+
+\end{document}

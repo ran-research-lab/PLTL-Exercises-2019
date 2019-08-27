@@ -1,0 +1,82 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+
+
+
+\title{PLTL Exercise 1 (Hourglass Drawer)}
+\author{CCOM 3034 – Data Structures \& Algorithms}
+\date{Week 1}
+
+\begin{document}
+
+%\begin{center}
+    %\textbf{Universidad de Puerto Rico, R{\'\i}o Piedras}\\
+    %Facultad de Ciencias Naturales\\
+    %Departamento de Ciencias de C\'omputos\\
+    %San Juan, Puerto Rico
+%\end{center}
+
+\maketitle
+
+\section{Instructions}
+
+You are to design and implement three (3) simple functions, the first of which will be named \texttt{hourglassDrawer1}, which takes in an integer \texttt{s} that specifies the size of one of the sides of an ``equilateral'' triangle you will print out to the terminal. This triangle will be ``inverted'' (i.e. upside down) and the character you are to use is \texttt{`\#'} separated by blank spaces. Here is its declaration (note that the default size will be 2):
+
+\begin{center}
+    \texttt{void hourglassDrawer1(int s = 2);}
+\end{center}
+
+\noindent This function, given an \texttt{s} value of \texttt{7}, will print out:
+
+\begin{center}
+    \texttt{\# \# \# \# \# \# \# \\* \# \# \# \# \# \# \\*  \# \# \# \# \# \\*   \# \# \# \# \\*    \# \# \# \\*     \# \# \\*      \# \\*}
+\end{center}
+
+\noindent Note that each of the sides are of size \texttt{7} (top, left, and right), and that there is one newline for each ``row'' of the triangle (\texttt{7}, in this example). \\
+
+\noindent For the second function, \texttt{hourglassDrawer2}, you will print out the same shape, but you will add the functionality of allowing the user to select which character \texttt{b} to use for the ``border'' of the triangle and which character \texttt{f} to use for the ``fill'' of the triangle. A sample declaration of such would be (note the default values of each parameter):
+
+\begin{center}
+    \texttt{void hourglassDrawer2(int s = 2, char b =  `\#', char f = `*');}
+\end{center}
+
+This function, given an \texttt{s} of \texttt{8}, a \texttt{b} of \texttt{`@'}, and an \texttt{f} of \texttt{`\$'}, will print out:
+
+\begin{center}
+    \texttt{@ @ @ @ @ @ @ @ \\* @ \$ \$ \$ \$ \$ @ \\*  @ \$ \$ \$ \$ @ \\*   @ \$ \$ \$ @ \\*    @ \$ \$ @ \\*     @ \$ @ \\*      @ @ \\*       @ \\*}
+\end{center}
+
+\noindent Finally, for the third function, \texttt{hourglassDrawer3}, you will add the ``bottom'' triangle of the hourglass so that, if given an \texttt{s} of \texttt{9}, a \texttt{b} of \texttt{`\&'}, and an \texttt{f} of \texttt{`!'}, it will print out:
+
+\begin{center}
+    \texttt{\& \& \& \& \& \& \& \& \& \\* \& !\ !\ !\ !\ !\ !\ \& \\*  \& !\ !\ !\ !\ !\ \& \\*   \& !\ !\ !\ !\ \& \\*    \& !\ !\ !\ \& \\*     \& !\ !\ \& \\*      \& !\ \& \\*       \& \& \\*        \& \\*        \& \\*       \& \& \\*      \& !\ \& \\*     \& !\ !\ \& \\*    \& !\ !\ !\ \& \\*   \& !\ !\ !\ !\ \& \\*  \& !\ !\ !\ !\ !\ \& \\* \& !\ !\ !\ !\ !\ !\ \& \\*\& \& \& \& \& \& \& \& \& \\*}
+\end{center}
+
+\section{Notes}
+
+In each of the three functions, add some input validation so that, if the user gives an \texttt{s} smaller than 2, it sets the size to \texttt{2}. Conversely, if the user gives an \texttt{s} greater than 39, set the size to \texttt{39}. On the other hand, we will only permit the border and fill characters to be between `!' (ascii 33) and ` ' (ascii 126) (inclusive). If the user gives a character outside that range, set the border (or fill) to its default value (`\texttt{\#}' or `\texttt{*}', respectively).
+
+\section{Additional Notes}
+
+You will be compiling and running the program on a Unix environment. That is, you will be using the terminal (and your compiler of preference, though we recommend g++) to compile your source code (i.e. hourglassDrawer.cpp) to an executable file (i.e. hourglassDrawer) using the following command:
+
+\begin{center}
+    \texttt{g++ source\_code\_name.cpp -o executable\_name -std=c++11} (for g++)\newline
+\end{center}
+
+\noindent The \texttt{g++} command makes the terminal know that we will be passing in a command to the g++ compiler. Then, we specify the name of the source code we wish to compile by writing its name followed by its file extension (hence \texttt{source\_code\_name.cpp}). Next comes the \texttt{-o} flag, which lets g++ know that the executable file's name will be \texttt{executable\_name}. Last, but not least, we will be using the C++ 2011 Standard, so we specify it by using the \texttt{-std} flag and passing in \texttt{c++11} as a parameter. \\
+
+\noindent \textbf{(Note: Specifying the standard used wasn't necessary for this particular exercise, but when using C++'s newer features, like range-based for loops, we'll need to specify our standard to avoid compiling errors and other security measures.)}
+
+\end{document}

@@ -1,0 +1,9 @@
+
+Para 2da reunión: problemas sobre complejidad
+    
+    -Edits de Víctor a lo del Dr. Arce: 
+    1. Quité una coma y un 'by' en el último paréntesis del primer párrafo para ahorrarme una línea
+    2. Añadí un 'is' antes de 'higher' en el último párrafo de la sección 1.2
+    3. Otras cositas pequeñas que no necesitan mención, como añadir comas y espacios.
+
+Para 3ra reunión: member functions de resize y shrink para lista implementada usando arreglos dinámicos
