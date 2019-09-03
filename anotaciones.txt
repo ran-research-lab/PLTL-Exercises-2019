@@ -7,3 +7,8 @@ Para 2da reunión: problemas sobre complejidad
     3. Otras cositas pequeñas que no necesitan mención, como añadir comas y espacios.
 
 Para 3ra reunión: member functions de resize y shrink para lista implementada usando arreglos dinámicos
+    
+    -Edits de Víctor a lo original de Víctor:
+    1. Quitar en el primer párrafo "whenever the capacity and size are equal
+    2. Change Section 2 (Notes) and eliminate the part about automatic garbage collectors and repl.it
+    3. Añadir print() y comentarios para append() y remove()

@@ -31,7 +31,8 @@
 
 \section{Instructions}
 
-You are to design and implement two (2) member functions that are part of a class called \texttt{DynArray}, the first of which will be named \texttt{grow}, which increases the capacity of the array whenever the size and capacity are equal. Here is its declaration (note it doesn't take any parameters):
+You are to design and implement two (2) member functions that are part of a class called \texttt{DynArray}, the first of which will be named \texttt{grow}, which increases the capacity of the array. Here is its declaration (note it doesn't take any parameters):
+%whenever the size and capacity are equal
 
 \begin{center}
     \texttt{void DynArray::grow();}
@@ -51,13 +52,14 @@ You are to design and implement two (2) member functions that are part of a clas
 
 \section{Notes}
 
-Since this exercise uses dynamic memory allocation, you are \textbf{\underline{strongly urged}} to use an online IDE (Integrated Development Environment) with an automatic garbage collector such as \textbf{repl.it} so that no harm is done to your computer for compiling and running faulty code (i.e. when debugging, etc.).
+Since this exercise uses dynamic memory allocation, you are urged to use the \texttt{delete} operator to avoid memory leaks whenever possible. Remember: for each \texttt{new}, there should be a corresponding \texttt{delete}.
+%you are \textbf{\underline{strongly urged}} to use an online IDE (Integrated Development Environment) such as \textbf{repl.it} so that no harm is done to your computer for compiling and running faulty code (i.e. when debugging, etc.).
 
 \newpage
 
-\section{Additional Notes}
+\section{\texttt{DynArray} Class}
 
-Use the following sample declaration/definition of the \texttt{DynArrray} class so that you may use its data members and member functions accordingly (should they be necessary):
+%Use the following sample declaration/definition of the \texttt{DynArrray} class so that you may use its data members and member functions accordingly (should they be necessary):
 
 \begin{lstlisting}[language=C++]
     class DynArray {
@@ -72,6 +74,7 @@ Use the following sample declaration/definition of the \texttt{DynArrray} class 
             ~DynArray();        // deletes the array
             void append(int n); // appends n to the end of the array
             void remove();      // removes from the end of the array
+            void print();       // prints array elements
     };
     
     DynArray::DynArray() {
@@ -87,11 +90,11 @@ Use the following sample declaration/definition of the \texttt{DynArrray} class 
     void DynArray::append(int n) {
         arr[size] = n;
         size++;
-    }
+    } // EDIT
     
     void DynArray::remove() {
         size--;
-    }
+    } // EDIT
     
     void DynArray::grow() {
         // YOUR CODE HERE
@@ -99,6 +102,11 @@ Use the following sample declaration/definition of the \texttt{DynArrray} class 
     
     void DynArray::shrink() {
         // YOUR CODE HERE
+    }
+    
+    void DynArray::print() {
+        for(int i = 0; i < size; i++)
+            cout << arr[i] << ((i != size - 1) ? " " : "\n");
     }
 \end{lstlisting}
 
