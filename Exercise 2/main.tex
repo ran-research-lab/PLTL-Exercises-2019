@@ -22,6 +22,9 @@
 
 \maketitle
 
+
+
+
 \section{Notes on Time Complexity}
 
 In class, we analyzed ``theoretically'' the number of ``steps'' an algorithm takes. For example, we analyzed the Linear Search algorithm and estimated its number of steps, $T(N) = 2N + 2$. This estimate is important because now we know that the number of steps the algorithm takes grows linearly with respect to the size of the array being searched. This allows us to have an idea of how the \textbf{execution time} grows as a function of the input size if we implement the algorithm. Since execution time is proportional to the number of steps, we can predict that a C++ function that implements Linear Search will have an execution time of $t_{exec}(N) = c N$, where $c$ is a constant that we find experimentally (i.e. running the program).

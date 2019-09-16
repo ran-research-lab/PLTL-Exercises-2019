@@ -13,15 +13,9 @@
 \usepackage{booktabs}
 \usepackage{listings}
 
-% \lstset {
-%     language=C++,
-%     backgroundcolor=\color{black!5}, % set backgroundcolor
-%     basicstyle=\footnotesize,% basic font setting
-% }
 
 
-
-\title{PLTL Exercise 3 (Dynamic Arrays)}
+\title{PLTL Exercise 3 (Inheritance)}
 \author{CCOM 3034 – Data Structures \& Algorithms}
 \date{Week 3}
 
@@ -29,85 +23,38 @@
 
 \maketitle
 
+
+
 \section{Instructions}
 
-You are to design and implement two (2) member functions that are part of a class called \texttt{DynArray}, the first of which will be named \texttt{grow}, which increases the capacity of the array. Here is its declaration (note it doesn't take any parameters):
-%whenever the size and capacity are equal
+\textbf{Let's practice inheritance!} \\
 
-\begin{center}
-    \texttt{void DynArray::grow();}
-\end{center}
+\noindent In this exercise you will practice: (1) creating a derived class from a base class, (2) implementing functions for the derived class, and (3) simple string algorithms. \\
 
-\noindent This function should essentially create a copy of the original array but with its capacity increased by 5, and then reassign the array pointer to the new copy. Remember to delete any useless memory allocation done when the original array was created (i.e. delete the old array). \\
+\noindent The purpose of this exercise is to create a class called \texttt{SuperString} which is derived from the C++ \verb|string| class. Since the \verb|string| class supports many constructors, we will only be overloading the following:
 
-\noindent Now, the second function, \texttt{shrink}, will (unsurprisingly) shrink the array's capacity by 5 whenever there are 5 empty spaces or more in the array. Here is its declaration (note it doesn't take any parameters):
+\begin{itemize}
+    \item the default constructor: just leave the body of the \verb|SuperString()| constructor empty and let the C++ inheritance call the \verb|string| by default.
+    \item the constructor that receives a \texttt{const string \&st}. Again, leave the body of the \verb|SuperString| \verb|(const string &st)| constructor empty, but call the \verb|string(st)| constructor in the initializer list.
+\end{itemize}
 
-\begin{center}
-    \texttt{void DynArray::shrink();}
-\end{center}
+\noindent The \texttt{SuperString} class will also support the following member functions:
 
-\noindent Note that the structure of the function will be very similar to that of \texttt{grow}'s. \\
-
-\noindent One final remark: both \texttt{grow} and \texttt{shrink} don't actually carry out the ``detection'' needed to know if the growing and shrinking should be done. This ``detection'' should be done whenever we try to \textit{append} a new element and the array is \underline{already full}, or whenever we try to \textit{remove} an element and the array will have 5 empty spaces \underline{following the removal}. Thus, you are also required to make the corresponding changes to functions \texttt{append} and \texttt{remove}, whose code is provided in the next page (along with the whole class declaration/definition).
+\begin{itemize}
+    \item \texttt{void SuperString::reverse()} - which reverses the \texttt{SuperString}
+    \item \texttt{int SuperString::count(char c)} - which counts the number of times that character \texttt{c} appears in the string
+    \item \texttt{SuperString SuperString::upperCase() const} - which returns a copy of the original \texttt{SuperString} in uppercase
+    \item \verb|SuperString intersection(const SuperString &st)| which returns the letters which appear in both the invoking and the argument string. For example, the intersection of \verb|"mouse"| and \verb|"spam"| is \verb|"sm"| or \verb|"ms"|. Try to make it a $O(n+m)$ algorithm, where $n$ and $m$ are the length of the strings. 
+\end{itemize}
 
 \section{Notes}
 
-Since this exercise uses dynamic memory allocation, you are urged to use the \texttt{delete} operator to avoid memory leaks whenever possible. Remember: for each \texttt{new}, there should be a corresponding \texttt{delete}.
-%you are \textbf{\underline{strongly urged}} to use an online IDE (Integrated Development Environment) such as \textbf{repl.it} so that no harm is done to your computer for compiling and running faulty code (i.e. when debugging, etc.).
+\noindent Notice that we are not overloading the assignment operator (\texttt{=}). Thus, in your program you won't be able to assign to \texttt{SuperString}s like this:
 
-\newpage
+\begin{center}
+    \texttt{SuperString ss = "Hola";}
+\end{center}
 
-\section{\texttt{DynArray} Class}
 
-%Use the following sample declaration/definition of the \texttt{DynArrray} class so that you may use its data members and member functions accordingly (should they be necessary):
-
-\begin{lstlisting}[language=C++]
-    class DynArray {
-        private:
-            int size;
-            int capacity;
-            int* arr;
-            void grow();        // increases capacity by 5
-            void shrink();      // decreases capacity by 5
-        public:
-            DynArray();         // creates an empty array of capacity 5
-            ~DynArray();        // deletes the array
-            void append(int n); // appends n to the end of the array
-            void remove();      // removes from the end of the array
-            void print();       // prints array elements
-    };
-    
-    DynArray::DynArray() {
-        size = 0;
-        capacity = 5;
-        arr = new int[capacity];
-    }
-    
-    DynArray::~DynArray() {
-        delete [] arr;
-    }
-    
-    void DynArray::append(int n) {
-        arr[size] = n;
-        size++;
-    } // EDIT
-    
-    void DynArray::remove() {
-        size--;
-    } // EDIT
-    
-    void DynArray::grow() {
-        // YOUR CODE HERE
-    }
-    
-    void DynArray::shrink() {
-        // YOUR CODE HERE
-    }
-    
-    void DynArray::print() {
-        for(int i = 0; i < size; i++)
-            cout << arr[i] << ((i != size - 1) ? " " : "\n");
-    }
-\end{lstlisting}
 
 \end{document}

@@ -1,0 +1,109 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{listings}
+
+
+
+\title{PLTL Exercise 4 (Dynamic Arrays)}
+\author{CCOM 3034 – Data Structures \& Algorithms}
+\date{Week 4}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section{Instructions}
+
+You are to design and implement two (2) member functions that are part of a class called \texttt{DynArray}, the first of which will be named \texttt{grow}, which increases the capacity of the array. Here is its declaration (note it doesn't take any parameters):
+%whenever the size and capacity are equal
+
+\begin{center}
+    \texttt{void DynArray::grow();}
+\end{center}
+
+\noindent This function should essentially create a copy of the original array but with its capacity increased by 5, and then reassign the array pointer to the new copy. Remember to delete any useless memory allocation done when the original array was created (i.e. delete the old array). \\
+
+\noindent Now, the second function, \texttt{shrink}, will (unsurprisingly) shrink the array's capacity by 5 whenever there are 5 empty spaces or more in the array. Here is its declaration (note it doesn't take any parameters):
+
+\begin{center}
+    \texttt{void DynArray::shrink();}
+\end{center}
+
+\noindent Note that the structure of the function will be very similar to that of \texttt{grow}'s. \\
+
+\noindent One final remark: both \texttt{grow} and \texttt{shrink} don't actually carry out the ``detection'' needed to know if the growing and shrinking should be done. This ``detection'' should be done whenever we try to \textit{append} a new element and the array is \underline{already full}, or whenever we try to \textit{remove} an element and the array will have 5 empty spaces \underline{following the removal}. Thus, you are also required to make the corresponding changes to functions \texttt{append} and \texttt{remove}, whose code is provided in the next page (along with the whole class declaration/definition).
+
+\section{Notes}
+
+Since this exercise uses dynamic memory allocation, you are urged to use the \texttt{delete} operator to avoid memory leaks whenever possible. Remember: for each \texttt{new}, there should be a corresponding \texttt{delete}.
+%you are \textbf{\underline{strongly urged}} to use an online IDE (Integrated Development Environment) such as \textbf{repl.it} so that no harm is done to your computer for compiling and running faulty code (i.e. when debugging, etc.).
+
+\newpage
+
+\section{\texttt{DynArray} Class}
+
+%Use the following sample declaration/definition of the \texttt{DynArrray} class so that you may use its data members and member functions accordingly (should they be necessary):
+
+\begin{lstlisting}[language=C++]
+    class DynArray {
+        private:
+            int size;
+            int capacity;
+            int* arr;
+            void grow();        // increases capacity by 5
+            void shrink();      // decreases capacity by 5
+        public:
+            DynArray();         // creates an empty array of capacity 5
+            ~DynArray();        // deletes the array
+            void append(int n); // appends n to the end of the array
+            void remove();      // removes from the end of the array
+            void print();       // prints array elements
+    };
+    
+    DynArray::DynArray() {
+        size = 0;
+        capacity = 5;
+        arr = new int[capacity];
+    }
+    
+    DynArray::~DynArray() {
+        delete [] arr;
+    }
+    
+    void DynArray::append(int n) {
+        arr[size] = n;
+        size++;
+    } // EDIT
+    
+    void DynArray::remove() {
+        size--;
+    } // EDIT
+    
+    void DynArray::grow() {
+        // YOUR CODE HERE
+    }
+    
+    void DynArray::shrink() {
+        // YOUR CODE HERE
+    }
+    
+    void DynArray::print() {
+        for(int i = 0; i < size; i++)
+            cout << arr[i] << ((i != size - 1) ? " " : "\n");
+    }
+\end{lstlisting}
+
+\end{document}
