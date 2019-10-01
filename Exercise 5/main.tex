@@ -1,0 +1,119 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{listings}
+
+
+
+\title{PLTL Exercise 5 (Linked Lists)}
+\author{CCOM 3034 – Data Structures \& Algorithms}
+\date{Week 5}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section{Some Questions on Linked Lists}
+
+In class, we implemented a List ADT using a singly-linked list with a head pointer and a tail pointer, as well as a length data member (for a quick reminder, see its definition below). 
+
+\begin{enumerate}
+    \item What is the Big-Oh of the functions \texttt{append}, \texttt{prepend}, \texttt{insertAfter}, and \texttt{search}?
+    \item If we didn't have the tail pointer, what would've been the Big-Oh of \texttt{append}? What about the Big-Oh of the other functions? Would they be affected?
+    \item If \texttt{insertAfter} didn't receive the parameter \texttt{p}, what would've been its Big-Oh?
+    \item Implement a new member function, called \texttt{average}, that returns the average of the whole list. It should be $O(1)$ (Hint: What can we change in the class's definition to help us make it $O(1)$?).
+\end{enumerate} \\
+
+\section {\texttt{Node} \& \texttt{Llist} Class Definitions}
+
+%Use the following sample declaration/definition of the \texttt{Llist} class so that you may use its data members and member functions accordingly (should they be necessary):
+
+\begin{lstlisting}[language=C++]
+    class Node {
+        public:
+            int data;
+            Node *next;
+            Node(int d = 0, Node *n = NULL): data(d), next(n) {}
+    };
+
+    class Llist {
+        private:
+            Node *head, *tail;
+            int length;
+        public:
+            Llist() : head(NULL), tail(NULL), length(0) {}
+            void append(int d);
+            void prepend(int d);
+            void insertAfter(Node *p, int d);
+            Node *search(int d) const;
+            friend ostream& operator<< (ostream &out, const Llist& L);
+    };
+    
+    
+    void Llist::append(int d){
+        Node *n = new Node(d);
+        if(!head) head = n;
+        else tail->next = n;
+        tail = n;
+        length++;
+    }
+    
+    void Llist::prepend(int d) {
+        Node *n = new Node(d, head);
+        head = n;
+        if(length == 0) tail = n;
+        length++;
+    }
+    
+    void Llist::insertAfter(Node *p, int d) {
+        Node *n;
+        if(p == NULL) {
+            n = new Node(d, head);
+            head = n;
+            if(!tail) tail = n;
+        }
+        else {
+            n = new Node(d, p->next);
+            p->next = n;
+            if(tail == p) tail = n;
+        }
+        length++;
+    }
+    
+    Node* Llist::search(int d) const {
+        Node *p = head;
+        while(p) {
+            if(p->data == d) return p;
+            p = p->next;
+        }
+        return NULL;
+    }
+
+    ostream& operator<< (ostream &out, const Llist& L) {
+        Node *p = L.head;
+        while(p) {
+            out << p->data << " ";
+            p = p->next;
+        }
+        return out;
+    }
+\end{lstlisting}
+
+%\section{Notes}
+
+%Since this exercise uses dynamic memory allocation, you are urged to use the \texttt{delete} operator to avoid memory leaks whenever possible. Remember: for each \texttt{new}, there should be a corresponding \texttt{delete}.
+%you are \textbf{\underline{strongly urged}} to use an online IDE (Integrated Development Environment) such as \textbf{repl.it} so that no harm is done to your computer for compiling and running faulty code (i.e. when debugging, etc.).
+
+\end{document}
