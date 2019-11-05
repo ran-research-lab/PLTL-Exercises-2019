@@ -1,0 +1,105 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{listings}
+\lstset{%frame=tb,
+  %language=cpp,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=false,
+  breakatwhitespace=false,
+  tabsize=3
+}
+
+
+\title{PLTL Exercise 8 (Recursive Time Complexities)}
+\author{CCOM 3034 – Data Structures \& Algorithms}
+\date{Week 8}
+
+\begin{document}
+
+%\begin{center}
+    %\textbf{Universidad de Puerto Rico, R{\'\i}o Piedras}\\
+    %Facultad de Ciencias Naturales\\
+    %Departamento de Ciencias de C\'omputos\\
+    %San Juan, Puerto Rico
+%\end{center}
+
+\maketitle
+
+\section{Problems}
+
+Using the Recursion Trees Method, calculate the time complexities of the following recursive functions.
+
+\subsection{Problem 1}
+
+\[ 
+    T(N) = 
+    \begin{cases} 
+        a & N = 0 \\
+        b + T(N-1) & N > 0
+    \end{cases}
+\]
+
+\subsection{Problem 2}
+
+\[ 
+    T(N) = 
+    \begin{cases} 
+        a & N = 1 \\
+        b + T(N/2) & N > 1
+    \end{cases}
+\]
+
+\subsection{Problem 3}
+
+\[ 
+    T(N) = 
+    \begin{cases} 
+        a & N = 0 \\
+        b + cN + T(N-1) & N > 0
+    \end{cases}
+\]
+
+\subsection{Problem 4 \normalfont{(recall this is the complexity of the function \texttt{maxRec} we discussed in class!)}}
+
+\[ 
+    T(N) = 
+    \begin{cases} 
+        a & N = 1 \\
+        b + 2T(N/2) & N > 1
+    \end{cases}
+\]
+
+\subsection{Problem 5}
+
+\[ 
+    T(N) = 
+    \begin{cases} 
+        a & N = 0 \\
+        b + 2T(N-1) & N > 0
+    \end{cases}
+\]
+
+\subsection{Problem 6}
+
+\noindent Notice some functions had $N-1$ as arguments in the recursive step, while others had $N/2$. Will a function that has $N/2$ as argument \textit{always} have a smaller time complexity than one whose argument is $N-1$? Why so (or why not)? Give an example.
+
+\end{document}

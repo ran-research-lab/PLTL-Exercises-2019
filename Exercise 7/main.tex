@@ -1,0 +1,105 @@
+\documentclass[11 pt]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{listings}
+\lstset{%frame=tb,
+  %language=cpp,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=false,
+  breakatwhitespace=false,
+  tabsize=3
+}
+
+
+\title{PLTL Exercise 7 (International Recursion Week)}
+\author{CCOM 3034 – Data Structures \& Algorithms}
+\date{Week 7}
+
+\begin{document}
+
+%\begin{center}
+    %\textbf{Universidad de Puerto Rico, R{\'\i}o Piedras}\\
+    %Facultad de Ciencias Naturales\\
+    %Departamento de Ciencias de C\'omputos\\
+    %San Juan, Puerto Rico
+%\end{center}
+
+\maketitle
+
+\section{Problems}
+
+
+\subsection{Problem 1}
+
+Consider the following function \texttt{void skyIsTheLimit(int n)} to answer the questions:
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}
+void skyIsTheLimit(int n) {
+    if (n == 100) return;
+    cout << n << endl;
+    skyIsTheLimit(n + 1);
+}
+
+\end{lstlisting}
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item Is \texttt{void skyIsTheLimit(int n)} recursive? If so, why?
+    \vspace{-.25cm}  
+    \item For which values of \texttt n does it work without segmentation fault?
+    \vspace{-.25cm}  
+    \item What is the output?
+\end{itemize}
+
+\subsection{Problem 2}
+The function \texttt{int maxRec(int A[], int low, int high)} uses recursion to return the max value of an array. Use hand tracing for an 8 element array.
+
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}
+int maxRec(int A[], int low, int high) {
+    if (low == high) return A[low];
+    int mid = (high + low) / 2;
+    return max(maxRec(A, low, mid), maxRec(A, mid + 1, high));
+}
+\end{lstlisting}
+\end{tabular}
+\end{center}
+
+\subsection{Problem 3: \textit {Be a recursion hero!}}
+Use your hand tracing powers to determine the value of \texttt{aa(2,2)}. (Hint: \textit {even for such small values, this function is diabolically recursive.}
+
+\begin{center}
+\begin{tabular}{c}
+\begin{lstlisting}
+int aa(int m, int n) {
+    if (m == 0)             return n + 1;
+    if (m > 0 && n == 0)    return aa(m - 1, 1);
+    if (m > 0 && n > 0)     return aa(m - 1, aa(m,n - 1));
+}
+\end{lstlisting}
+\end{tabular}
+\end{center}
+
+
+\end{document}
